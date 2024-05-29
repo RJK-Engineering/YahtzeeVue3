@@ -1,0 +1,17 @@
+
+ThrownDices.vue
+Zet alle logica voor de weergave van de geworpen stenen in het nieuwe component. Via een v-model kun je de geworpen stenen aan de parent doorgeven.
+
+ScoreTable.vue
+Maak ook nu weer gebruik van een property om de telling van het aantal stenen die in App.vue wordt bijgehouden door te geven zodat dit child component vervolgens alle mogelijke scores kan bepalen en weergeven in zijn template.
+
+   App.vue 
+main component
+	^	^
+	|	| property die geworpen stenen doorgeeft 
+	|   |
+	|	+--> ThrownDices.vue
+	|
+	| property die de frequentie van geworpen stenen doorgeeft
+	|
+	+--> ScoreTable.vue
