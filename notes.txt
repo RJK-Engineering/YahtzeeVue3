@@ -9,7 +9,7 @@ Maak ook nu weer gebruik van een property om de telling van het aantal stenen di
 main component
 	^	^
 	|	| property die geworpen stenen doorgeeft 
-	|   |
+	|  |
 	|	+--> ThrownDices.vue
 	|
 	| property die de frequentie van geworpen stenen doorgeeft

@@ -7,7 +7,7 @@ import ScoreTable from './components/ScoreTable.vue'
   <main>
     <div id="container">
         <header>
-            <h1>Yathzee</h1>
+            <h1>Yahtzee</h1>
         </header>
 
         <ThrownDices />
@@ -41,8 +41,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
@@ -53,7 +53,7 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -194,7 +194,7 @@ table {
   margin: 0px auto 50px auto;
 }
 
-th, 
+th,
 td {
   font-family: Helvetica, sans-serif;
   width: 75px;
@@ -338,7 +338,7 @@ td.arrow {
   height: 50px;
   line-height: 50px;
   }
-  
+
   .fiveDice button {
   font-size: 50px;
   width: 32px;
@@ -353,7 +353,7 @@ td.arrow {
   line-height: 80px;
   margin: 10px;
   }
-  
+
   .fiveDice button {
   font-size: 80px;
   width: 60px;
