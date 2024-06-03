@@ -10,7 +10,9 @@ function gooi() {
 }
 
 function keep(e) {
-    e.srcElement.style.filter = "invert(.5)";
+    const button = e.srcElement.parentElement;
+    button.style.filter = "invert(.5)";
+    console.log(button.id);
 }
 
 </script>
