@@ -15,3 +15,59 @@ main component
 	| property die de frequentie van geworpen stenen doorgeeft
 	|
 	+--> ScoreTable.vue
+
+
+App.vue
+<Dices @endOfRound="addScore" />
+addScore(throw) {
+    update scores
+}
+<ScoreCard :scores="scores" />
+const scores = ref({
+    [category name]: [score (number)]
+})
+------------------------------------
+Dices.vue
+resetThrow {
+    throw = [1,2,3,4,5]
+    selected = [f,f,f,f,f]
+    throwCount = 0
+}
+diceClicked(e) => {
+    selected[i] = !selected[i]
+}
+// dices react to changes in selected[]
+:class="{ selected: selected[i] }"
+
+// roll() displays (sets) dice buttons
+// or reactive?: button listens/roll() emits newThrow
+roll() {
+    if (throwCount == 3)
+        resetThrow()
+    throwCount++
+    for i in throw
+        if !selected[i]
+            throw[i] = rand 1..6
+}
+<button @click="$emit('endOfRound', throw)">
+<button @click="endOfRound">
+<script setup>
+const emit = defineEmits(['endOfRound'])
+endOfRound() {
+    emit('endOfRound', throw)
+    resetThrow()
+}
+------------------------------------
+ScoreCard.vue
+<script setup>
+//const props = defineProps(['scores'])
+defineProps(['scores'])
+<template>
+... {{ scores.[category name] }} ...
+
+
+------------------------------------
+
+<BlogPost v-bind="post" />
+=
+<BlogPost :id="post.id" :title="post.title" />
