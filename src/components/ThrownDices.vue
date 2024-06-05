@@ -1,31 +1,57 @@
 <script setup>
 import { ref } from 'vue'
+
 const throws = ref([1, 1, 1, 1, 1])
+const selected = ref({
+    dice1: false,
+    dice2: false,
+    dice3: false,
+    dice4: false,
+    dice5: false,
+})
 const dice = ref(["&#x2680;", "&#x2681;", "&#x2682;", "&#x2683;", "&#x2684;"])
 
-function gooi() {
-    throws.value = throws.value.map(() => Math.ceil(Math.random() * 6));
-    dice.value = throws.value.map((e) => "&#x268" + (e-1) + ";");
-    console.debug(throws.value);
+const diceModel = defineModel()
+
+function roll() {
+    const frequency = [0, 0, 0, 0, 0, 0]
+    for (let i=0; i<5; i++) {
+        if (!selected.value['dice' + (i+1)]) {
+            throws.value[i] = Math.ceil(Math.random() * 6)
+            dice.value[i] = "&#x268" + (throws.value[i] - 1) + ";"
+        }
+        frequency[throws.value[i] - 1]++
+    }
+    console.log(frequency)
+    diceModel.value = frequency
 }
 
-function keep(e) {
-    const button = e.srcElement.parentElement;
-    button.style.filter = "invert(.5)";
-    console.log(button.id);
+function diceClick(e) {
+    const buttonId = e.srcElement.parentElement.id
+    selected.value[buttonId] = !selected.value[buttonId]
 }
-
 </script>
 
 <template>
     <div class="fiveDice">
-        <button @click="keep" id="dice1" class="dice textHover"><div v-html="dice[0]"></div></button>
-        <button @click="keep" id="dice2" class="dice textHover"><div v-html="dice[1]"></div></button>
-        <button @click="keep" id="dice3" class="dice textHover"><div v-html="dice[2]"></div></button>
-        <button @click="keep" id="dice4" class="dice textHover"><div v-html="dice[3]"></div></button>
-        <button @click="keep" id="dice5" class="dice textHover"><div v-html="dice[4]"></div></button>
+        <button @click="diceClick" id="dice1" :class="[{ selected: selected.dice1 }, dice]"><div v-html="dice[0]"></div></button>
+        <button @click="diceClick" id="dice2" :class="[{ selected: selected.dice2 }, dice]"><div v-html="dice[1]"></div></button>
+        <button @click="diceClick" id="dice3" :class="[{ selected: selected.dice3 }, dice]"><div v-html="dice[2]"></div></button>
+        <button @click="diceClick" id="dice4" :class="[{ selected: selected.dice4 }, dice]"><div v-html="dice[3]"></div></button>
+        <button @click="diceClick" id="dice5" :class="[{ selected: selected.dice5 }, dice]"><div v-html="dice[4]"></div></button>
     </div>
     <div class="button">
-        <button @click="gooi" id="btn" class="btn wHover">Gooien</button>
+        <button @click="roll" id="btn" class="btn wHover">Gooien</button>
     </div>
 </template>
+
+<style>
+.fiveDice .dice {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}
+.selected {
+    filter: invert(.5);
+}
+</style>

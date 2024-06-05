@@ -1,6 +1,9 @@
 <script setup>
 import ThrownDices from './components/ThrownDices.vue'
 import ScoreTable from './components/ScoreTable.vue'
+
+import { ref } from 'vue'
+const diceModel = ref([0, 0, 0, 0, 0, 0])
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import ScoreTable from './components/ScoreTable.vue'
             <h1>Yahtzee</h1>
         </header>
 
-        <ThrownDices />
+        <ThrownDices v-model="diceModel" />
 
         <div class="button">
             <button id="btnFill" class="btn wHover">Vul score in</button>
@@ -26,7 +29,7 @@ import ScoreTable from './components/ScoreTable.vue'
             <p>Kies welke score je wil vastleggen op het scoreblok.</p>
         </div>
 
-        <ScoreTable />
+        <ScoreTable :diceModel="diceModel" />
     </div>
   </main>
 </template>
@@ -101,12 +104,6 @@ header h1 {
   margin: auto;
   justify-content: center;
   align-items: center;
-}
-
-.fiveDice .dice {
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
 }
 
 button {
