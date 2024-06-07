@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 
-const throws = ref([1, 1, 1, 1, 1])
 const selected = ref({
     dice1: false,
     dice2: false,
@@ -14,16 +13,11 @@ const dice = ref(["&#x2680;", "&#x2681;", "&#x2682;", "&#x2683;", "&#x2684;"])
 const diceModel = defineModel()
 
 function roll() {
-    const frequency = [0, 0, 0, 0, 0, 0]
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<5; i++)
         if (!selected.value['dice' + (i+1)]) {
-            throws.value[i] = Math.ceil(Math.random() * 6)
-            dice.value[i] = "&#x268" + (throws.value[i] - 1) + ";"
+            diceModel.value[i] = Math.ceil(Math.random() * 6)
+            dice.value[i] = "&#x268" + (diceModel.value[i] - 1) + ";"
         }
-        frequency[throws.value[i] - 1]++
-    }
-    console.log(frequency)
-    diceModel.value = frequency
 }
 
 function diceClick(e) {

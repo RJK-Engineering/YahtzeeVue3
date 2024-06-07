@@ -3,7 +3,14 @@ import ThrownDices from './components/ThrownDices.vue'
 import ScoreTable from './components/ScoreTable.vue'
 
 import { ref } from 'vue'
-const diceModel = ref([0, 0, 0, 0, 0, 0])
+const diceModel = ref([1, 2, 3, 4, 5])
+const frequency = ref([0, 0, 0, 0, 0, 0])
+
+function addThrow() {
+    frequency.value = [0, 0, 0, 0, 0, 0]
+    for (var i=0; i<diceModel.value.length; i++)
+        frequency.value[diceModel.value[i] - 1]++
+}
 </script>
 
 <template>
@@ -16,7 +23,7 @@ const diceModel = ref([0, 0, 0, 0, 0, 0])
         <ThrownDices v-model="diceModel" />
 
         <div class="button">
-            <button id="btnFill" class="btn wHover">Vul score in</button>
+            <button @click="addThrow" id="btnFill" class="btn wHover">Vul score in</button>
         </div>
 
         <div class="round">
@@ -29,7 +36,7 @@ const diceModel = ref([0, 0, 0, 0, 0, 0])
             <p>Kies welke score je wil vastleggen op het scoreblok.</p>
         </div>
 
-        <ScoreTable :diceModel="diceModel" />
+        <ScoreTable :frequency="frequency" />
     </div>
   </main>
 </template>
