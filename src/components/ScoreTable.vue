@@ -1,66 +1,88 @@
 <script setup>
 const props = defineProps(['frequency'])
 
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
+
+class Round {
+    upperScores = []
+    // upperScore
+    // bonus
+    // upperScoreTotal
+    // threeOfKind
+    // fourOfKind
+    // fullHouse
+    // smStraight
+    // lgStraight
+    // yahtzee
+    // chance
+    // lowerScore
+    // upperScoreLower
+    // grandTotal
+}
+const games = ref([1,2,3,4,5].map(() => new Round()))
+const currentRoundNr = ref(0)
+const currentRound = computed(() => games.value[currentRoundNr.value])
 
 const upperScores = computed(() => {
-    const currentRound = props.frequency.map((e, i) => e * (i+1))
-    const round = [0, 0, 0, 0, 0, 0]
-    return [currentRound, round, round, round, round]
+    const scores = props.frequency.map((frequency, i) => frequency * (i+1))
+    currentRound.value.upperScores = scores
+    return games.value.map((round) => round.upperScores)
 })
 const upperScore = computed(() => {
-    const currentRound = upperScores.value[0].reduce((acc, val) => acc + val)
-    return [currentRound, 0, 0, 0, 0, 0]
+    const score = currentRound.value.upperScores.reduce((acc, val) => acc + val)
+    currentRound.value.upperScore = score
+    return games.value.map((round) => round.upperScore)
 })
+
 const bonus = computed(() => {
-    const currentRound = upperScore.value[0] >= 63 ? 35 : 0
-    return [currentRound, 0, 0, 0, 0, 0]
+    const score = upperScore.value[0] >= 63 ? 35 : 0
+    return [score, 0, 0, 0, 0]
 })
 const upperScoreTotal = computed(() => {
-    const currentRound = upperScore.value[0] + bonus.value[0]
-    return [currentRound, 0, 0, 0, 0, 0]
+    const score = upperScore.value[0] + bonus.value[0]
+    return [score, 0, 0, 0, 0]
 })
 const threeOfKind = computed(() => {
     const counts = props.frequency.reduce((acc, val) => acc || val >= 3, false)
-    const currentRound = counts ? upperScores.value[0].reduce((acc, val) => acc + val) : 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = counts ? upperScores.value[0].reduce((acc, val) => acc + val) : 0
+    return [score, 0, 0, 0, 0]
 })
 const fourOfKind = computed(() => {
     const counts = props.frequency.reduce((acc, val) => acc || val >= 4, false)
-    const currentRound = counts ? upperScores.value[0].reduce((acc, val) => acc + val) : 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = counts ? upperScores.value[0].reduce((acc, val) => acc + val) : 0
+    return [score, 0, 0, 0, 0]
 })
 const fullHouse = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const smStraight = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const lgStraight = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const yahtzee = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const chance = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const lowerScore = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const upperScoreLower = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 const grandTotal = computed(() => {
-    const currentRound = 0
-    return [currentRound, 0, 0, 0, 0]
+    const score = 0
+    return [score, 0, 0, 0, 0]
 })
 </script>
 

@@ -5,66 +5,16 @@ Zet alle logica voor de weergave van de geworpen stenen in het nieuwe component.
 ScoreTable.vue
 Maak ook nu weer gebruik van een property om de telling van het aantal stenen die in App.vue wordt bijgehouden door te geven zodat dit child component vervolgens alle mogelijke scores kan bepalen en weergeven in zijn template.
 
-   App.vue 
+   App.vue
 main component
 	^	^
-	|	| property die geworpen stenen doorgeeft 
+	|	| property die geworpen stenen doorgeeft
 	|  |
 	|	+--> ThrownDices.vue
 	|
 	| property die de frequentie van geworpen stenen doorgeeft
 	|
 	+--> ScoreTable.vue
-
-
-App.vue
-<Dices @endOfRound="addScore" />
-addScore(throw) {
-    update scores
-}
-<ScoreCard :scores="scores" />
-const scores = ref({
-    [category name]: [score (number)]
-})
-------------------------------------
-Dices.vue
-resetThrow {
-    throw = [1,2,3,4,5]
-    selected = [f,f,f,f,f]
-    throwCount = 0
-}
-diceClicked(e) => {
-    selected[i] = !selected[i]
-}
-// dices react to changes in selected[]
-:class="{ selected: selected[i] }"
-
-// roll() displays (sets) dice buttons
-// or reactive?: button listens/roll() emits newThrow
-roll() {
-    if (throwCount == 3)
-        resetThrow()
-    throwCount++
-    for i in throw
-        if !selected[i]
-            throw[i] = rand 1..6
-}
-<button @click="$emit('endOfRound', throw)">
-<button @click="endOfRound">
-<script setup>
-const emit = defineEmits(['endOfRound'])
-endOfRound() {
-    emit('endOfRound', throw)
-    resetThrow()
-}
-------------------------------------
-ScoreCard.vue
-<script setup>
-//const props = defineProps(['scores'])
-defineProps(['scores'])
-<template>
-... {{ scores.[category name] }} ...
-
 
 ------------------------------------
 

@@ -15,8 +15,9 @@ const diceModel = defineModel()
 function roll() {
     for (let i=0; i<5; i++)
         if (!selected.value['dice' + (i+1)]) {
-            diceModel.value[i] = Math.ceil(Math.random() * 6)
-            dice.value[i] = "&#x268" + (diceModel.value[i] - 1) + ";"
+            const diceValue = Math.ceil(Math.random() * 6)
+            diceModel.value[i] = diceValue
+            dice.value[i] = "&#x268" + (diceValue - 1) + ";"
         }
 }
 
